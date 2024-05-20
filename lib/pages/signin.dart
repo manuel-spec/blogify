@@ -30,7 +30,44 @@ class _SignInWidgetState extends State<SignInWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w800,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const Text(
+              'Back',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w800,
+              ),
+              textAlign: TextAlign.start,
+            ),
+            Container(
+              height: 100,
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.mail),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
