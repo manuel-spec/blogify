@@ -1,6 +1,6 @@
 # blogify
 
-A new Flutter project.
+blogify is a blogging application  final project for mobile application design course
 
 ## Getting Started
 
