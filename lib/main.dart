@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hotelify/pages/Home/home.dart';
-import 'package:hotelify/pages/signin.dart';
-import 'package:hotelify/pages/signup.dart';
-import 'package:hotelify/pages/welcome.dart';
+import 'package:blogify/pages/Home/home.dart';
+import 'package:blogify/pages/signin.dart';
+import 'package:blogify/pages/signup.dart';
+import 'package:blogify/pages/welcome.dart';
 
 void main() {
   runApp(const MyApp());
