@@ -52,6 +52,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.go('/signup');
+                            },
+                            child: const Text('Sign up'),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 90, vertical: 10),
+                              textStyle: GoogleFonts.poppins(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              elevation: 3,
+                              backgroundColor: const Color(0xFF303133),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(47),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Already have an account ?',
+                              style: TextStyle(
+                                color: Color(0xFF848484),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                context.go('/signin');
+                              },
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
