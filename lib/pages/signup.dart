@@ -56,6 +56,66 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             Container(
               height: 20,
             ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Full Name',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.mail),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _passwordController,
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+                onPressed: () {},
+                child: Text('Sign up'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 70, 62, 62)),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+                )),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                // Navigate to signup screen
+                context.go('/signin');
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.black),
+                padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+              ),
+              child: Text('Already have an account? Sign in'),
+            ),
           ],
         ),
       ),
