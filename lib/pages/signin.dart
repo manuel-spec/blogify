@@ -65,6 +65,50 @@ class _SignInWidgetState extends State<SignInWidget> {
                 prefixIcon: Icon(Icons.mail),
               ),
             ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _passwordController,
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+                onPressed: () {
+                  context.go("/home");
+                },
+                child: Text('Login'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 70, 62, 62)),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+                )),
+            SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                // Navigate to signup screen
+                context.go('/signup');
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.black),
+                padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+              ),
+              child: Text('Don\'t have an account? Sign up'),
+            ),
           ],
         ),
       ),
