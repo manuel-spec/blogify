@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:blogify/Models/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInWidget extends StatefulWidget {
   const SignInWidget({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class _SignInWidgetState extends State<SignInWidget> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   bool _passwordVisible = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -37,10 +40,36 @@ class _SignInWidgetState extends State<SignInWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://192.168.8.196:6000/api/login";
-    final response = await http.post(Uri.parse(url), body: json.encode(body));
+    var url = "http://10.240.69.88:9000/api/login";
+    final response = await http.post(
+      Uri.parse(url),
+      body: json.encode(body),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    final Map<String, dynamic> res = json.decode(response.body);
 
-    print(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
+        _isLoading = false;
+      });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("token", res['access_token']);
+      prefs.setInt('id', res['user']['id']);
+      prefs.setString('name', res['user']['name']);
+      prefs.setString('username', res['user']['username']);
+      prefs.setString('email', res['user']['email']);
+      context.go('/home');
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Center(
+        child: Text("Invalid Credentials"),
+      )));
+    }
   }
 
   @override
@@ -108,8 +137,14 @@ class _SignInWidgetState extends State<SignInWidget> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: ElevatedButton(
-                  onPressed: _signIn,
-                  child: const Text('Sign in'),
+                  onPressed: () {
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    Future.delayed(const Duration(seconds: 3), () {
+                      _signIn();
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 90, vertical: 10),
@@ -124,6 +159,11 @@ class _SignInWidgetState extends State<SignInWidget> {
                       borderRadius: BorderRadius.circular(47),
                     ),
                   ),
+                  child: _isLoading
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text('Sign in'),
                 ),
               ),
               SizedBox(height: 20),
