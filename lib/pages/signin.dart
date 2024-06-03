@@ -37,7 +37,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://192.168.207.196:6000";
+    var url = "http://192.168.8.196:6000/api/login";
     final response = await http.post(Uri.parse(url), body: json.encode(body));
 
     print(response.body);
