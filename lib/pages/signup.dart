@@ -12,6 +12,8 @@ class SignUpWidget extends StatefulWidget {
 class _SignUpWidgetState extends State<SignUpWidget> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  late TextEditingController _fullNameController;
+  late TextEditingController _usernameController;
   bool _passwordVisible = false;
 
   @override
@@ -19,12 +21,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _fullNameController = TextEditingController();
+    _usernameController = TextEditingController();
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _fullNameController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -60,7 +66,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             ),
             const SizedBox(height: 20),
             TextFormField(
-              controller: _emailController,
+              controller: _fullNameController,
               decoration: const InputDecoration(
                 labelText: 'Full Name',
                 border: OutlineInputBorder(),
@@ -69,7 +75,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             ),
             const SizedBox(height: 20),
             TextFormField(
-              controller: _emailController,
+              controller: _usernameController,
               decoration: const InputDecoration(
                 labelText: 'Username',
                 border: OutlineInputBorder(),
