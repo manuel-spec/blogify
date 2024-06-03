@@ -12,165 +12,81 @@ class HomeWidget extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
+            Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: const Text(
-                    "Hey User Let's",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromARGB(255, 70, 62, 62),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.blueGrey,
+                      ),
                     ),
-                  ),
+                    Container(
+                      child: Text("User243435"),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      child: Text("@user2044"),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Text(
+                          "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                          softWrap: true,
+                          maxLines: null,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: const Text(
-                    "Find you a post",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w200),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Container(
+                    width: 20,
+                    height: 100,
                   ),
-                ),
-              ],
-            ),
-            Container(
-              // padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-              width: 300,
-              child: TextField(
-                autofocus: true,
-                decoration: InputDecoration(
-                  hintText: 'Search for Blogs',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.grey, // Default border color
-                      width: 2.0,
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    width: 290,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color.fromARGB(255, 144, 224, 239),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.blue, // Enabled border color
-                      width: 2.0,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.grey, // Focused border color
-                      width: 2.0,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.red, // Error border color
-                      width: 2.0,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.red, // Focused error border color
-                      width: 2.0,
-                    ),
-                  ),
-                ),
+                  )
+                ],
               ),
             ),
             Row(
               children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(
-                      10, 20, 0, 0), // Adjust margin as needed
-                  padding: const EdgeInsets.fromLTRB(
-                      10, 5, 10, 5), // Adjust padding as needed
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey, // Border color
-                      width: 1.0, // Border width
-                    ),
-                    color: Color.fromARGB(255, 49, 49, 51),
-                    borderRadius: BorderRadius.circular(30.0), // Border radius
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Top rated",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromARGB(255, 253, 253, 253),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: const Text(
-                    "Popular",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      color: Color.fromARGB(255, 70, 62, 62),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                  width: 318,
-                  height: 317,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 241, 242, 244),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Container(
                     margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Inner Thoughts",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              fontFamily: 'Poppins'),
-                        ),
-                      ],
+                    child: Icon(
+                      Icons.thumb_up_alt,
+                      color: Color.fromARGB(255, 0, 119, 182),
                     )),
                 Container(
-                  margin: EdgeInsets.fromLTRB(50, 10, 0, 0),
-                  child: Text("1500"),
-                ),
+                    margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                    child: Icon(
+                      Icons.message,
+                      color: Color.fromARGB(255, 0, 119, 182),
+                    )),
                 Container(
-                  margin: EdgeInsets.fromLTRB(4, 10, 0, 0),
-                  child: Text(
-                    "by user21221",
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                )
+                    margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                    child: Icon(
+                      Icons.share,
+                      color: Color.fromARGB(255, 0, 119, 182),
+                    )),
               ],
             )
           ],
