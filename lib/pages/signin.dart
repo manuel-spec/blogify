@@ -62,6 +62,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       prefs.setString('email', res['user']['email']);
       context.go('/home');
     } else {
+      print(response.statusCode);
       setState(() {
         _isLoading = false;
       });
