@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignInWidget extends StatefulWidget {
   const SignInWidget({Key? key}) : super(key: key);
@@ -40,17 +41,17 @@ class _SignInWidgetState extends State<SignInWidget> {
             const Text(
               'Welcome',
               style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w800,
-              ),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF03045E)),
               textAlign: TextAlign.left,
             ),
             const Text(
               'Back',
               style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w800,
-              ),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF03045E)),
               textAlign: TextAlign.start,
             ),
             Container(
@@ -86,17 +87,29 @@ class _SignInWidgetState extends State<SignInWidget> {
               ),
             ),
             SizedBox(height: 20),
-            TextButton(
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: ElevatedButton(
                 onPressed: () {
-                  context.go("/home");
+                  context.go('/signup');
                 },
-                child: Text('Login'),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 70, 62, 62)),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(15)),
-                )),
+                child: const Text('Sign in'),
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
+                  textStyle: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  elevation: 3,
+                  backgroundColor: const Color(0xFF0077B6),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(47),
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 20),
             TextButton(
               onPressed: () {

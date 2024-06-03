@@ -39,18 +39,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         const Text(
                           'Share Your',
                           style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 30,
-                            fontWeight: FontWeight.w800,
-                          ),
+                              fontFamily: 'Poppins',
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF03045E)),
                         ),
                         const Text(
                           'Thoughts',
                           style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 30,
-                            fontWeight: FontWeight.w800,
-                          ),
+                              fontFamily: 'Poppins',
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF03045E)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20),
@@ -67,7 +67,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 fontWeight: FontWeight.normal,
                               ),
                               elevation: 3,
-                              backgroundColor: const Color(0xFF303133),
+                              backgroundColor: const Color(0xFF0077B6),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(47),

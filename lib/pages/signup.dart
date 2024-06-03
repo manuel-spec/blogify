@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpWidget extends StatefulWidget {
   const SignUpWidget({Key? key}) : super(key: key);
@@ -40,9 +41,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             const Text(
               'Let\'s Get',
               style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w900,
-              ),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF03045E)),
               textAlign: TextAlign.left,
             ),
             const Text(
@@ -50,6 +51,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w900,
+                color: Color(0xFF03045E),
               ),
               textAlign: TextAlign.start,
             ),
@@ -63,6 +65,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 labelText: 'Full Name',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.mail),
               ),
             ),
             const SizedBox(height: 20),
@@ -95,15 +106,29 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ),
             ),
             SizedBox(height: 20),
-            TextButton(
-                onPressed: () {},
-                child: Text('Sign up'),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 70, 62, 62)),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(15)),
-                )),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  context.go('/signup');
+                },
+                child: const Text('Sign up'),
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
+                  textStyle: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  elevation: 3,
+                  backgroundColor: const Color(0xFF0077B6),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(47),
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
