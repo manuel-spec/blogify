@@ -1,3 +1,4 @@
+import 'package:blogify/pages/Post/create.dart';
 import 'package:blogify/pages/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/profile',
           builder: (context, state) => const Profile(),
+        ),
+        GoRoute(
+          path: '/post',
+          builder: (context, state) => const PostWidget(),
         ),
         // Add other routes for other tabs if needed
       ],
@@ -75,6 +80,9 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
         context.go('/home');
         break;
       case 1:
+        context.go('/post'); // Uncomment and add a GoRoute for /profile
+        break;
+      case 2:
         context.go('/profile'); // Uncomment and add a GoRoute for /profile
         break;
     }
@@ -83,23 +91,29 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.white,
-        indicatorColor: Color.fromARGB(255, 144, 224, 239),
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
+        body: widget.child,
+        bottomNavigationBar: SizedBox(
+          height: 48,
+          child: NavigationBar(
+            backgroundColor: Colors.white,
+            indicatorColor: Color.fromARGB(255, 144, 224, 239),
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: _onItemTapped,
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.add),
+                label: 'Post',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.person),
+                label: 'Profile',
+              ),
+            ],
           ),
-          NavigationDestination(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
