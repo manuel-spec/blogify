@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -24,12 +26,12 @@ class _ProfileState extends State<Profile> {
   final String name = "Amanuel";
   final String username = "thenM33";
   final String bio = "Flutter Developer. Tech Enthusiast. Coffee Lover.";
-  final List<String> recentActivities = [
-    "Posted a new blog on Flutter development.",
-    "Liked a post about Dart programming.",
-    "Commented on a JavaScript tutorial.",
-    "Started following @flutterdev."
-  ];
+
+  void _logout() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+    context.go('/profile');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,33 +109,15 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  'Recent Activities',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 8),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: recentActivities.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 4),
-                      child: ListTile(
-                        leading: Icon(Icons.check_circle_outline,
-                            color: Colors.blueAccent),
-                        title: Text(recentActivities[index]),
-                      ),
-                    );
-                  },
+                TextButton(
+                  onPressed: _logout,
+                  child: Text('logout'),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(16)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)))),
                 ),
               ],
             ),

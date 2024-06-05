@@ -17,7 +17,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
 
-    var url = "http://10.240.69.35:9000/api/blogs";
+    var url = "http://10.240.69.102:9000/api/blogs";
     final response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

@@ -40,7 +40,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://10.240.69.35:9000/api/login";
+    var url = "http://10.240.69.102:9000/api/login";
     final response = await http.post(
       Uri.parse(url),
       body: json.encode(body),
@@ -60,6 +60,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       prefs.setString('name', res['user']['name']);
       prefs.setString('username', res['user']['username']);
       prefs.setString('email', res['user']['email']);
+      prefs.setBool('isLoggedIn', true);
       context.go('/home');
     } else {
       print(response.statusCode);
@@ -109,7 +110,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.mail),
+                  prefixIcon: Icon(
+                    Icons.mail,
+                    color: Color(0xFF03045E),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -119,12 +123,16 @@ class _SignInWidgetState extends State<SignInWidget> {
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Color(0xFF03045E),
+                  ),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
+                      color: Color(0xFF03045E),
                     ),
                     onPressed: () {
                       setState(() {

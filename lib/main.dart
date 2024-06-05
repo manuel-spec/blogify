@@ -1,5 +1,6 @@
 import 'package:blogify/pages/Post/create.dart';
 import 'package:blogify/pages/Profile/profile.dart';
+import 'package:blogify/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:blogify/pages/Home/home.dart';
@@ -12,7 +13,12 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
+  initialLocation: '/',
   routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const SplashScreen(),
+    ),
     ShellRoute(
       builder: (context, state, child) => ScaffoldWithNavBar(child: child),
       routes: [
@@ -26,14 +32,10 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: '/post',
-          builder: (context, state) => const PostWidget(),
+          builder: (context, state) => PostWidget(),
         ),
         // Add other routes for other tabs if needed
       ],
-    ),
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomePageWidget(),
     ),
     GoRoute(
       path: '/signin',
@@ -80,10 +82,10 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
         context.go('/home');
         break;
       case 1:
-        context.go('/post'); // Uncomment and add a GoRoute for /profile
+        context.go('/post');
         break;
       case 2:
-        context.go('/profile'); // Uncomment and add a GoRoute for /profile
+        context.go('/profile');
         break;
     }
   }
