@@ -48,7 +48,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           future: _getPosts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 144, 224, 239),
+              ));
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -91,10 +94,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 30),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
                                     child: Text(
-                                      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                                      blog.title,
+                                      softWrap: true,
+                                      maxLines: null,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 6),
+                                    child: Text(
+                                      blog.description,
                                       softWrap: true,
                                       maxLines: null,
                                     ),
