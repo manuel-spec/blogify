@@ -43,6 +43,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   bool _isLoading = false;
 
   void _signUp() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
     final Map<String, String> body = {
       'name': _fullNameController.text,
       'username': _usernameController.text,
@@ -50,7 +52,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://10.240.69.88:9000/api/register";
+    var url = "http://10.240.69.35:9000/api/register";
     final response = await http.post(
       Uri.parse(url),
       body: json.encode(body),
@@ -61,6 +63,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     final Map<String, dynamic> res = json.decode(response.body);
 
     if (response.statusCode == 201) {
+      preferences.setString("token", res['access_token']);
+      preferences.setInt('id', res['user']['id']);
+      preferences.setString('name', res['user']['name']);
+      preferences.setString('username', res['user']['username']);
+      preferences.setString('email', res['user']['email']);
+
       setState(() {
         _isLoading = false;
       });

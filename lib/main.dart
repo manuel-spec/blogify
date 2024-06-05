@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
   }
@@ -69,7 +70,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
         context.go('/home');
         break;
       case 1:
-        // context.go('/profile'); // Uncomment and add a GoRoute for /profile
+        context.go('/profile'); // Uncomment and add a GoRoute for /profile
         break;
     }
   }
@@ -79,6 +80,8 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.white,
+        indicatorColor: Color.fromARGB(255, 144, 224, 239),
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
         destinations: const [
