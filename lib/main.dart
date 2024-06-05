@@ -1,3 +1,4 @@
+import 'package:blogify/pages/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:blogify/pages/Home/home.dart';
@@ -17,6 +18,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/home',
           builder: (context, state) => const HomeWidget(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const Profile(),
         ),
         // Add other routes for other tabs if needed
       ],
