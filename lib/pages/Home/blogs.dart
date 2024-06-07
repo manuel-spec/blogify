@@ -62,82 +62,83 @@ class _BlogsWidgetState extends State<BlogsWidget> {
             itemCount: blogs.length,
             itemBuilder: (context, index) {
               final blog = blogs[index];
-              return GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: SizedBox(
-                            height: 800,
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      blog.title,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
+              return Container(
+                // margin: EdgeInsets.symmetric(vertical: 40),
+                padding: EdgeInsets.symmetric(vertical: 20),
+                decoration: BoxDecoration(
+                    border: Border(bottom: BorderSide(color: Colors.black26))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: SizedBox(
+                                  height: 800,
+                                  width: double.infinity,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            blog.title,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            blog.description,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            blog.content,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          SizedBox(height: 20),
+                                          Text(
+                                            'Author: ${blog.user.name}',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Username: @${blog.user.username}',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      blog.description,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      blog.content,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Text(
-                                      'Author: ${blog.user.name}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      'Username: @${blog.user.username}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: Container(
-                  // margin: EdgeInsets.symmetric(vertical: 40),
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.black26))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Column(
                         children: [
                           Row(
                             children: [
@@ -190,30 +191,30 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Container(
-                              margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                              child: Icon(
-                                Ionicons.heart_outline,
-                                color: Color.fromARGB(255, 220, 220, 220),
-                              )),
-                          Container(
-                              margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                              child: Icon(
-                                Icons.message_outlined,
-                                color: Color.fromARGB(255, 220, 220, 220),
-                              )),
-                          Container(
-                              margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                              child: Icon(
-                                Icons.share,
-                                color: Color.fromARGB(255, 220, 220, 220),
-                              )),
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                            child: Icon(
+                              Ionicons.heart_outline,
+                              color: Color.fromARGB(255, 220, 220, 220),
+                            )),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                            child: Icon(
+                              Icons.message_outlined,
+                              color: Color.fromARGB(255, 220, 220, 220),
+                            )),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                            child: Icon(
+                              Icons.share,
+                              color: Color.fromARGB(255, 220, 220, 220),
+                            )),
+                      ],
+                    )
+                  ],
                 ),
               );
             },
