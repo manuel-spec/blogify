@@ -17,6 +17,10 @@ class MyBlogsWidget extends StatefulWidget {
 }
 
 class _MyBlogsWidgetState extends State<MyBlogsWidget> {
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _contentController = TextEditingController();
+
   Future<List<Blog>> _getPosts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
@@ -40,14 +44,37 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
     }
   }
 
-  void _updateBlog() async {
+  Future<void> _updateBlog(
+      int blogId, String title, String description, String content) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token")!;
-    String id = prefs.getInt('id').toString();
+    String token = prefs.getString('token')!;
 
-    var url = "http://192.168.201.112:9000/api/blogs/";
+    Uri url = Uri.parse('http://192.168.201.112:9000/api/blogs/$blogId');
+
+    final response = await http.put(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(<String, String>{
+        'title': title,
+        'description': description,
+        'content': content,
+        'category_id': '1',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print('Blog updated successfully');
+      // Handle success accordingly (e.g., show a success message)
+    } else {
+      print('Failed to update blog: ${response.body}');
+      // Handle failure accordingly (e.g., show an error message)
+    }
   }
 
+  @override
   void initState() {
     super.initState();
     _getPosts();
@@ -74,7 +101,6 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
             itemBuilder: (context, index) {
               final blog = blogs[index];
               return Container(
-                // margin: EdgeInsets.symmetric(vertical: 40),
                 padding: EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
                     border: Border(bottom: BorderSide(color: Colors.black26))),
@@ -104,81 +130,113 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                               margin: EdgeInsets.only(left: 100),
                               child: IconButton(
                                 onPressed: () {
+                                  _titleController.text = blog.title;
+                                  _descriptionController.text =
+                                      blog.description;
+                                  _contentController.text = blog.content;
                                   showModalBottomSheet(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: SizedBox(
-                                          height: 500,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Edit Blog",
-                                                style: TextStyle(
-                                                  fontSize: 24,
-                                                  fontFamily:
-                                                      GoogleFonts.poppins()
-                                                          .fontFamily,
-                                                ),
-                                              ),
-                                              SizedBox(height: 16),
-                                              TextFormField(
-                                                initialValue: blog.title,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Title',
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black26),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors
-                                                            .lightBlueAccent),
+                                      return SingleChildScrollView(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: SizedBox(
+                                            height: 800,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Edit Blog",
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontFamily:
+                                                        GoogleFonts.poppins()
+                                                            .fontFamily,
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(height: 16),
-                                              TextFormField(
-                                                initialValue: blog.description,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Description',
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.black26),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors
-                                                            .lightBlueAccent),
+                                                SizedBox(height: 16),
+                                                TextFormField(
+                                                  controller: _titleController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Title',
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black26),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .lightBlueAccent),
+                                                    ),
                                                   ),
                                                 ),
-                                                maxLines: 3,
-                                              ),
-                                              SizedBox(height: 16),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  // Add your update logic here
-                                                  _updateBlog(
+                                                SizedBox(height: 16),
+                                                TextFormField(
+                                                  controller:
+                                                      _descriptionController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Description',
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black26),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .lightBlueAccent),
+                                                    ),
+                                                  ),
+                                                  maxLines: 3,
+                                                ),
+                                                SizedBox(height: 16),
+                                                TextFormField(
+                                                  controller:
+                                                      _contentController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Content',
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black26),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .lightBlueAccent),
+                                                    ),
+                                                  ),
+                                                  maxLines: 3,
+                                                ),
+                                                SizedBox(height: 16),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    _updateBlog(
                                                       blog.id,
-                                                      blog.title,
-                                                      blog.description,
-                                                      blog.content);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text("Update"),
-                                                style: ElevatedButton.styleFrom(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 16),
-                                                  textStyle:
-                                                      TextStyle(fontSize: 16),
+                                                      _titleController.text,
+                                                      _descriptionController
+                                                          .text,
+                                                      _contentController.text,
+                                                    );
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Update"),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 16),
+                                                    textStyle:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
