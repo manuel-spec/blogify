@@ -24,7 +24,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           backgroundColor: Colors.white,
           elevation: 0,
           toolbarHeight: 0, // Remove the default AppBar height
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
               Tab(
                 text: "For You",
@@ -35,7 +35,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             BlogsWidget(),
             Text("text2"),
