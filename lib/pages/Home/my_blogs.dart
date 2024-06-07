@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:blogify/Models/userModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:ionicons/ionicons.dart';
@@ -92,7 +94,23 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                             Container(
                               margin: EdgeInsets.only(left: 100),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SizedBox(
+                                          height: 500,
+                                          child: Center(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("close"),
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
                                 icon: Icon(Icons.edit),
                               ),
                             )
