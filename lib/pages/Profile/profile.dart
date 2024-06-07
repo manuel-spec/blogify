@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class MyApp extends StatelessWidget {
   @override
@@ -23,14 +26,49 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  final String name = "Amanuel";
-  final String username = "thenM33";
-  final String bio = "Flutter Developer. Tech Enthusiast. Coffee Lover.";
+  String name = "";
+  String username = "";
+  String bio = "";
 
   void _logout() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
     context.go('/profile');
+  }
+
+  void _fetchUserInformation() async {
+    // Fetch user information from the server http://192.168.201.112:9000/api/users/:id
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token")!;
+    String id = prefs.getInt('id').toString();
+
+    var url = "http://192.168.201.112:9000/api/users/$id";
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> res = json.decode(response.body);
+      setState(() {
+        name = res['user']['name'];
+        username = res['user']['username'];
+      });
+
+      print(res['user']);
+    } else {
+      print(response.body);
+      throw Exception('Failed to load blogs');
+    }
+  }
+
+  void initState() {
+    super.initState();
+    _fetchUserInformation();
   }
 
   @override
@@ -77,41 +115,21 @@ class _ProfileState extends State<Profile> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Bio',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          bio,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
                 SizedBox(height: 16),
-                TextButton(
-                  onPressed: _logout,
-                  child: Text('logout'),
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor: MaterialStateProperty.all(Colors.red),
-                      padding: MaterialStateProperty.all(EdgeInsets.all(16)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)))),
-                ),
+                Center(
+                  child: TextButton(
+                    onPressed: _logout,
+                    child: Text('logout'),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(16)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                  ),
+                )
               ],
             ),
           ),

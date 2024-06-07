@@ -55,13 +55,14 @@ class _PostWidgetState extends State<PostWidget> {
 
         // Show a confirmation message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Post submitted successfully!')),
+          const SnackBar(content: Text('Post submitted successfully!')),
         );
       } else {
         print(response.body);
         // Handle the error
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to submit post. Please try again.')),
+          const SnackBar(
+              content: Text('Failed to submit post. Please try again.')),
         );
       }
     }
