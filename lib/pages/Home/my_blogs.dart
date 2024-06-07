@@ -4,6 +4,7 @@ import 'package:blogify/Models/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:ionicons/ionicons.dart';
@@ -37,6 +38,14 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
     } else {
       throw Exception('Failed to load blogs');
     }
+  }
+
+  void _updateBlog() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token")!;
+    String id = prefs.getInt('id').toString();
+
+    var url = "http://192.168.201.112:9000/api/blogs/";
   }
 
   void initState() {
@@ -110,7 +119,9 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                                                 "Edit Blog",
                                                 style: TextStyle(
                                                   fontSize: 24,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily:
+                                                      GoogleFonts.poppins()
+                                                          .fontFamily,
                                                 ),
                                               ),
                                               SizedBox(height: 16),
@@ -152,6 +163,11 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                                               ElevatedButton(
                                                 onPressed: () {
                                                   // Add your update logic here
+                                                  _updateBlog(
+                                                      blog.id,
+                                                      blog.title,
+                                                      blog.description,
+                                                      blog.content);
                                                   Navigator.pop(context);
                                                 },
                                                 child: Text("Update"),
