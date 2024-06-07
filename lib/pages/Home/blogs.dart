@@ -80,7 +80,9 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                               ),
                             ),
                             Container(
-                              child: Text(blog.user.name),
+                              child: Text(
+                                blog.user.name,
+                              ),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 5),

@@ -58,7 +58,7 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 24),
                 TextFormField(
                   controller: _titleController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Title',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black26),
@@ -79,7 +79,7 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _descriptionController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Description',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black26),
@@ -100,7 +100,7 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _contentController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Content',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlueAccent),
