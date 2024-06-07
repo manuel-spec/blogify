@@ -10,8 +10,6 @@ import 'package:blogify/pages/signup.dart';
 import 'package:blogify/pages/welcome.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   runApp(const MyApp());
 }
 

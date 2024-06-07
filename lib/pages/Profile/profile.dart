@@ -38,13 +38,6 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.blueAccent, Colors.lightBlueAccent],
-          ),
-        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -65,7 +58,7 @@ class _ProfileState extends State<Profile> {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      // color: Colors.white,
                     ),
                   ),
                 ),
@@ -74,7 +67,7 @@ class _ProfileState extends State<Profile> {
                     '@$username',
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.white70,
+                      // color: Colors.white70,
                     ),
                   ),
                 ),

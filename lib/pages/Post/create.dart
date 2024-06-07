@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PostWidget extends StatefulWidget {
   const PostWidget({Key? key}) : super(key: key);
@@ -14,25 +18,52 @@ class _PostWidgetState extends State<PostWidget> {
   final _descriptionController = TextEditingController();
   final _contentController = TextEditingController();
 
-  void _submitPost() {
+  void _submitPost() async {
     if (_formKey.currentState!.validate()) {
       // Process the data (e.g., send it to a server or save it locally)
       String title = _titleController.text;
       String description = _descriptionController.text;
       String content = _contentController.text;
-      print('Title: $title');
-      print('Description: $description');
-      print('Content: $content');
 
-      // Clear the form
-      _titleController.clear();
-      _descriptionController.clear();
-      _contentController.clear();
+      // Get the token from SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
 
-      // Show a confirmation message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Post submitted successfully!')),
+      // Make the HTTP POST request
+      Uri url = Uri.parse('http://192.168.201.112:9000/api/blogs/');
+
+      http.Response response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'title': title,
+          'description': description,
+          'content': content,
+          "category_id": "1"
+        }),
       );
+
+      if (response.statusCode == 201) {
+        // Clear the form
+        _titleController.clear();
+        _descriptionController.clear();
+        _contentController.clear();
+        print(response.body);
+
+        // Show a confirmation message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Post submitted successfully!')),
+        );
+      } else {
+        print(response.body);
+        // Handle the error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to submit post. Please try again.')),
+        );
+      }
     }
   }
 
