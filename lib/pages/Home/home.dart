@@ -1,4 +1,5 @@
 import 'package:blogify/pages/Home/blogs.dart';
+import 'package:blogify/pages/Home/my_blogs.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -31,10 +32,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
         ),
         body: const TabBarView(
-          children: [
-            BlogsWidget(),
-            Text("text2"),
-          ],
+          children: [BlogsWidget(), MyBlogsWidget()],
         ),
       ),
     );
