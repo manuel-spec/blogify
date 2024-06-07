@@ -15,6 +15,16 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   String username = '';
   String email = '';
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserInformation();
+  }
+
   void _fetchUserInformation() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
@@ -31,22 +41,19 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> res = json.decode(response.body);
-      print(res['user']);
       setState(() {
         name = res['user']['name'];
         username = res['user']['username'];
         email = res['user']['email'];
       });
+      // Set initial values for text form fields
+      nameController.text = name;
+      usernameController.text = username;
+      emailController.text = email;
     } else {
       print(response.body);
       throw Exception('Failed to load user information');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUserInformation();
   }
 
   void _updateProfile() async {
@@ -115,7 +122,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
             ),
             Text('Name'),
             TextFormField(
-              initialValue: name.toString(),
+              controller: nameController,
               onChanged: (value) {
                 setState(() {
                   name = value;
@@ -125,7 +132,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
             SizedBox(height: 16),
             Text('Username'),
             TextFormField(
-              initialValue: username,
+              controller: usernameController,
               onChanged: (value) {
                 setState(() {
                   username = value;
@@ -135,7 +142,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
             SizedBox(height: 16),
             Text('Email'),
             TextFormField(
-              initialValue: email,
+              controller: emailController,
               onChanged: (value) {
                 setState(() {
                   email = value;
