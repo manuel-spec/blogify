@@ -61,19 +61,19 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     String token = prefs.getString('token')!;
     String id = prefs.getInt('id').toString();
 
+    final Map<String, String> body = {
+      'name': nameController.text,
+      'username': usernameController.text,
+      'email': emailController.text,
+    };
+
     var url = 'http://192.168.201.112:9000/api/users/$id';
-    final response = await http.put(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode(<String, String>{
-        'name': name,
-        'username': username,
-        'email': email,
-      }),
-    );
+    final response = await http.put(Uri.parse(url),
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+        },
+        body: body);
+    print(response.body);
 
     if (response.statusCode == 200) {
       // Update successful
@@ -88,73 +88,75 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: 60,
-                backgroundImage: NetworkImage(
-                    'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'), // Replace with your profile image URL
-              ),
-            ),
-            SizedBox(height: 16),
-            Center(
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  // color: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                      'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'), // Replace with your profile image URL
                 ),
               ),
-            ),
-            Center(
-              child: Text(
-                '@$username',
-                style: TextStyle(
-                  fontSize: 18,
-                  // color: Colors.white70,
+              SizedBox(height: 16),
+              Center(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    // color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            Text('Name'),
-            TextFormField(
-              controller: nameController,
-              onChanged: (value) {
-                setState(() {
-                  name = value;
-                });
-              },
-            ),
-            SizedBox(height: 16),
-            Text('Username'),
-            TextFormField(
-              controller: usernameController,
-              onChanged: (value) {
-                setState(() {
-                  username = value;
-                });
-              },
-            ),
-            SizedBox(height: 16),
-            Text('Email'),
-            TextFormField(
-              controller: emailController,
-              onChanged: (value) {
-                setState(() {
-                  email = value;
-                });
-              },
-            ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: _updateProfile,
-              child: Text('Update Profile'),
-            ),
-          ],
+              Center(
+                child: Text(
+                  '@$username',
+                  style: TextStyle(
+                    fontSize: 18,
+                    // color: Colors.white70,
+                  ),
+                ),
+              ),
+              Text('Name'),
+              TextFormField(
+                controller: nameController,
+                onChanged: (value) {
+                  setState(() {
+                    name = value;
+                  });
+                },
+              ),
+              SizedBox(height: 16),
+              Text('Username'),
+              TextFormField(
+                controller: usernameController,
+                onChanged: (value) {
+                  setState(() {
+                    username = value;
+                  });
+                },
+              ),
+              SizedBox(height: 16),
+              Text('Email'),
+              TextFormField(
+                controller: emailController,
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                },
+              ),
+              SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: _updateProfile,
+                child: Text('Update Profile'),
+              ),
+            ],
+          ),
         ),
       ),
     );
