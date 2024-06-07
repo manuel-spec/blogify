@@ -16,9 +16,32 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          toolbarHeight: 0, // Remove the default AppBar height
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: "For You",
+              ),
+              Tab(
+                text: "Following",
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            BlogsWidget(),
+            Text("text2"),
+          ],
+        ),
+      ),
     );
   }
 }

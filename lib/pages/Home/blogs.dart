@@ -61,7 +61,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
             itemBuilder: (context, index) {
               final blog = blogs[index];
               return Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+                // margin: EdgeInsets.symmetric(vertical: 40),
                 padding: EdgeInsets.symmetric(vertical: 20),
                 decoration: BoxDecoration(
                     border: Border(bottom: BorderSide(color: Colors.black26))),
