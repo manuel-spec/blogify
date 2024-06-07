@@ -30,7 +30,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 text: "For You",
               ),
               Tab(
-                text: "Following",
+                text: "Mine",
               ),
             ],
           ),

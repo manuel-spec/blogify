@@ -98,7 +98,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
     return Scaffold(
         body: widget.child,
         bottomNavigationBar: SizedBox(
-          height: 48,
+          height: 58,
           child: NavigationBar(
             backgroundColor: Colors.white,
             indicatorColor: Color.fromARGB(255, 144, 224, 239),

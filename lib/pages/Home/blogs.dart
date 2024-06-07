@@ -4,6 +4,7 @@ import 'package:blogify/Models/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:ionicons/ionicons.dart';
 
 class BlogsWidget extends StatefulWidget {
   const BlogsWidget({super.key});
@@ -124,20 +125,20 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
                             child: Icon(
-                              Icons.thumb_up_alt,
-                              color: Color.fromARGB(255, 0, 119, 182),
+                              Ionicons.heart_outline,
+                              color: Color.fromARGB(255, 220, 220, 220),
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
                             child: Icon(
-                              Icons.message,
-                              color: Color.fromARGB(255, 0, 119, 182),
+                              Icons.message_outlined,
+                              color: Color.fromARGB(255, 220, 220, 220),
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
                             child: Icon(
                               Icons.share,
-                              color: Color.fromARGB(255, 0, 119, 182),
+                              color: Color.fromARGB(255, 220, 220, 220),
                             )),
                       ],
                     )
