@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blogify/pages/Profile/profile_info.dart';
+import 'package:blogify/pages/Profile/profile_update.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +52,7 @@ class _ProfileState extends State<Profile> {
         body: const TabBarView(
           children: [
             ProfileInfo(),
-            Text("Profile Update"),
+            ProfileUpdate(),
           ],
         ),
       ),
