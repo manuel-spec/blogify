@@ -96,20 +96,78 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                               child: IconButton(
                                 onPressed: () {
                                   showModalBottomSheet(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return SizedBox(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: SizedBox(
                                           height: 500,
-                                          child: Center(
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text("close"),
-                                            ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Edit Blog",
+                                                style: TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(height: 16),
+                                              TextFormField(
+                                                initialValue: blog.title,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Title',
+                                                  border: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.black26),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors
+                                                            .lightBlueAccent),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 16),
+                                              TextFormField(
+                                                initialValue: blog.description,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Description',
+                                                  border: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.black26),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors
+                                                            .lightBlueAccent),
+                                                  ),
+                                                ),
+                                                maxLines: 3,
+                                              ),
+                                              SizedBox(height: 16),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  // Add your update logic here
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("Update"),
+                                                style: ElevatedButton.styleFrom(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 16),
+                                                  textStyle:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      });
+                                        ),
+                                      );
+                                    },
+                                  );
                                 },
                                 icon: Icon(Icons.edit),
                               ),
