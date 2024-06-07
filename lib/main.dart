@@ -2,6 +2,7 @@ import 'package:blogify/pages/Post/create.dart';
 import 'package:blogify/pages/Profile/profile.dart';
 import 'package:blogify/pages/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:blogify/pages/Home/home.dart';
 import 'package:blogify/pages/signin.dart';
@@ -9,6 +10,7 @@ import 'package:blogify/pages/signup.dart';
 import 'package:blogify/pages/welcome.dart';
 
 void main() {
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   runApp(const MyApp());
 }
 

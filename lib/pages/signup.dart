@@ -52,7 +52,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://10.240.69.102:9000/api/register";
+    var url = "http://192.168.201.112:9000/api/register";
     final response = await http.post(
       Uri.parse(url),
       body: json.encode(body),
