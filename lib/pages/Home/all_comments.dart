@@ -155,7 +155,9 @@ class _AllCommentsState extends State<AllComments> {
           future: _fetchComments,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Row(
+                children: [Text("@username")],
+              );
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -171,24 +173,29 @@ class _AllCommentsState extends State<AllComments> {
                       itemCount: comments.length,
                       itemBuilder: (context, index) {
                         final comment = comments[index];
-                        return ListTile(
-                          subtitle: FutureBuilder<String>(
-                            future:
-                                fetchUserInfo(comment['user_id'].toString()),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Row(
-                                  children: [CircularProgressIndicator()],
-                                );
-                              } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return Text(snapshot.data ?? 'Unknown user');
-                              }
-                            },
+                        return Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Colors.black26))),
+                          child: ListTile(
+                            subtitle: FutureBuilder<String>(
+                              future:
+                                  fetchUserInfo(comment['user_id'].toString()),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Row(
+                                    children: [Text("@username")],
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  return Text(snapshot.data ?? 'Unknown user');
+                                }
+                              },
+                            ),
+                            title: Text(comment['content']),
                           ),
-                          title: Text(comment['content']),
                         );
                       },
                     ),
