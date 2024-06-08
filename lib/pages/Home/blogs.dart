@@ -196,20 +196,57 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                       children: [
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                            child: Icon(
-                              Ionicons.heart_outline,
+                            child: IconButton(
+                              onPressed: () {
+                                print("like");
+                              },
+                              icon: Icon(Ionicons.heart_outline),
                               color: Color.fromARGB(255, 220, 220, 220),
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                            child: Icon(
-                              Icons.message_outlined,
+                            child: IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return SingleChildScrollView(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: SizedBox(
+                                          height: 1000,
+                                          width: double.infinity,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Center(
+                                                child: Text(
+                                                  "Comments",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              icon: Icon(Icons.message_outlined),
                               color: Color.fromARGB(255, 220, 220, 220),
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                            child: Icon(
-                              Icons.share,
+                            child: IconButton(
+                              onPressed: () {
+                                print("share");
+                              },
+                              icon: Icon(Icons.share),
                               color: Color.fromARGB(255, 220, 220, 220),
                             )),
                       ],
