@@ -20,7 +20,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   void _logout() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
-    context.go('/profile');
+    context.go('/signin');
   }
 
   void _fetchUserInformation() async {

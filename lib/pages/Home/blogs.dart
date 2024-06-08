@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blogify/Models/userModel.dart';
+import 'package:blogify/pages/Home/all_comments.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
   Future<List<Blog>> _getPosts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
+    print(token);
 
     var url = "http://192.168.201.112:9000/api/blogs";
     final response = await http.get(
@@ -33,6 +35,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
       // print(json);
       return json.map((data) => Blog.fromJson(data)).toList();
     } else {
+      print(response.body);
       throw Exception('Failed to load blogs');
     }
   }
@@ -206,7 +209,10 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
                             child: IconButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setInt("blog_id", blog.id);
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -229,6 +235,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                                                   ),
                                                 ),
                                               ),
+                                              AllComments(),
                                             ],
                                           ),
                                         ),
