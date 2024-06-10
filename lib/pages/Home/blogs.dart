@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:blogify/Models/userModel.dart';
+import 'package:blogify/Models/apiResponse.dart';
 import 'package:blogify/pages/Home/all_comments.dart';
+import 'package:blogify/Services/blogService.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +41,18 @@ class _BlogsWidgetState extends State<BlogsWidget> {
       throw Exception('Failed to load blogs');
     }
   }
+
+	void _handleLikes(int blogId) async {
+		ApiResponse response = await toggleLike(blogId);
+
+		if (response.error == null) {
+			setState(() {
+				_getPosts();
+			});
+		} else {
+			ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.error}')));
+		}
+	} 
 
   void initState() {
     super.initState();
@@ -199,12 +213,18 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                       children: [
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-                            child: IconButton(
-                              onPressed: () {
-                                print("like");
-                              },
-                              icon: Icon(Ionicons.heart_outline),
-                              color: Color.fromARGB(255, 220, 220, 220),
+                            child: Row(
+															mainAxisAlignment: MainAxisAlignment.center,
+															children: [
+																IconButton(
+																	onPressed: () {
+																		_handleLikes(blog.id ?? 0);
+																	},
+																	icon: blog.likesCount > 0 ? Icon(Ionicons.heart) : Icon(Ionicons.heart_outline),
+																	color: blog.likesCount > 0 ? Colors.red : Color.fromARGB(255, 220, 220, 220),
+																),
+																Text('${blog.likesCount}'),
+															],
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),

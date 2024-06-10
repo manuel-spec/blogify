@@ -49,8 +49,8 @@ Future<ApiResponse> createBlog(Blog blog) async {
       'title': blog.title,
       'description': blog.description,
       'content': blog.content,
-      'user_id': userId,
-      'category_id': blog.categoryId,
+      'user_id': '$userId',
+      'category_id': '${blog.categoryId}',
     };
 
     final response = await http.post(
