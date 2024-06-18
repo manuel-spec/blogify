@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:blogify/Models/apiResponse.dart';
 import 'package:blogify/Models/userModel.dart';
+import 'package:blogify/Services/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-const blogUrl = 'http://192.168.201.112:9000/api/blogs';
 
 Future<ApiResponse> getBlogs() async {
   ApiResponse apiResponse = ApiResponse();

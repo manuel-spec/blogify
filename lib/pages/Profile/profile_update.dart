@@ -1,3 +1,4 @@
+import 'package:blogify/Services/utils.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     String token = prefs.getString('token')!;
     String id = prefs.getInt('id').toString();
 
-    var url = 'http://192.168.201.112:9000/api/users/$id';
+    var url = '$userUrl/$id';
     final response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -67,7 +68,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       'email': emailController.text,
     };
 
-    var url = 'http://192.168.201.112:9000/api/users/$id';
+    var url = '$userUrl/$id';
     final response = await http.put(Uri.parse(url),
         headers: <String, String>{
           'Authorization': 'Bearer $token',

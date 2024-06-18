@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blogify/Services/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,9 +53,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://192.168.201.112:9000/api/register";
     final response = await http.post(
-      Uri.parse(url),
+      Uri.parse(registerUrl),
       body: json.encode(body),
       headers: <String, String>{
         'Content-Type': 'application/json',

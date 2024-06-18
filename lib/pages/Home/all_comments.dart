@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,7 @@ class _AllCommentsState extends State<AllComments> {
     }
 
     final response = await http.post(
-      Uri.parse('http://192.168.201.112:9000/api/comments/get/'),
+      Uri.parse('$commentsUrl/get/'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -47,7 +48,7 @@ class _AllCommentsState extends State<AllComments> {
     String token = prefs.getString("token")!;
 
     final response = await http.get(
-      Uri.parse('http://192.168.201.112:9000/api/users/$uid'),
+      Uri.parse('$userUrl/$uid'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -92,7 +93,7 @@ class _AllCommentsState extends State<AllComments> {
     }
 
     final response = await http.post(
-      Uri.parse('http://192.168.201.112:9000/api/comments/'),
+      Uri.parse(commentsUrl),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
