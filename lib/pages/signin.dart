@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blogify/Models/userModel.dart';
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,9 +41,8 @@ class _SignInWidgetState extends State<SignInWidget> {
       'password': _passwordController.text
     };
 
-    var url = "http://192.168.201.112:9000/api/login";
     final response = await http.post(
-      Uri.parse(url),
+      Uri.parse(loginUrl),
       body: json.encode(body),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',

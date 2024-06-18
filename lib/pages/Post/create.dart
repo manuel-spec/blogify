@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,7 @@ class _PostWidgetState extends State<PostWidget> {
       String? token = prefs.getString('token');
 
       // Make the HTTP POST request
-      Uri url = Uri.parse('http://192.168.201.112:9000/api/blogs/');
+      Uri url = Uri.parse(blogUrl);
 
       http.Response response = await http.post(
         url,

@@ -4,6 +4,7 @@ import 'package:blogify/Models/userModel.dart';
 import 'package:blogify/Models/apiResponse.dart';
 import 'package:blogify/pages/Home/all_comments.dart';
 import 'package:blogify/Services/blogService.dart';
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,9 +24,8 @@ class _BlogsWidgetState extends State<BlogsWidget> {
     String token = prefs.getString("token")!;
     print(token);
 
-    var url = "http://192.168.201.112:9000/api/blogs";
     final response = await http.get(
-      Uri.parse(url),
+      Uri.parse(blogUrl),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -215,16 +215,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
                             child: Row(
 															mainAxisAlignment: MainAxisAlignment.center,
-															children: [
-																IconButton(
-																	onPressed: () {
-																		_handleLikes(blog.id ?? 0);
-																	},
-																	icon: blog.likesCount > 0 ? Icon(Ionicons.heart) : Icon(Ionicons.heart_outline),
-																	color: blog.likesCount > 0 ? Colors.red : Color.fromARGB(255, 220, 220, 220),
-																),
-																Text('${blog.likesCount}'),
-															],
+															children: likeButton(blog, _handleLikes),
                             )),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),

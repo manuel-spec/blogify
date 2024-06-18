@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blogify/Models/userModel.dart';
 import 'package:blogify/Models/apiResponse.dart';
 import 'package:blogify/Services/blogService.dart';
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +29,7 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
     String token = prefs.getString("token")!;
     String id = prefs.getInt('id').toString();
 
-    var url = "http://192.168.201.112:9000/api/blogs/my/$id";
+    var url = "$blogUrl/my/$id";
     final response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -51,7 +52,7 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
 
-    Uri url = Uri.parse('http://192.168.201.112:9000/api/blogs/$blogId');
+    Uri url = Uri.parse('$blogUrl/$blogId');
 
     final response = await http.put(
       url,
@@ -298,18 +299,9 @@ class _MyBlogsWidgetState extends State<MyBlogsWidget> {
                       children: [
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),
-														cild: Row(
+														child: Row(
 															mainAxisAlignment: MainAxisAlignment.center,
-															children: [
-																IconButton(
-																	onPressed: () {
-																		_handleLikes(blog.id ?? 0);
-																	},
-																	icon: blog.likesCount > 0 ? Icon(Ionicons.heart) : Icon(Ionicons.heart_outline),
-																	color: blog.likesCount > 0 ? Colors.red : Color.fromARGB(255, 220, 220, 220),
-																),
-																Text('${blog.likesCount}'),
-															],
+															children: likeButton(blog, _handleLikes),
 														)),
                         Container(
                             margin: const EdgeInsets.fromLTRB(50, 10, 0, 0),

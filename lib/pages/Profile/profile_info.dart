@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +31,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     String token = prefs.getString("token")!;
     String id = prefs.getInt('id').toString();
 
-    var url = "http://192.168.201.112:9000/api/users/$id";
+    var url = "$userUrl/$id";
     final response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
