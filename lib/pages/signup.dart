@@ -27,7 +27,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     _passwordController = TextEditingController();
     _fullNameController = TextEditingController();
     _usernameController = TextEditingController();
-    _fullNameController = TextEditingController();
   }
 
   @override
@@ -36,7 +35,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     _passwordController.dispose();
     _fullNameController.dispose();
     _usernameController.dispose();
-    _fullNameController.dispose();
 
     super.dispose();
   }
@@ -97,6 +95,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Color(0xFF1A1A2E),
         padding: const EdgeInsets.all(20),
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -109,7 +108,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF03045E)),
+                    color: Color(0xFFE94560)),
                 textAlign: TextAlign.left,
               ),
               const Text(
@@ -117,7 +116,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF03045E),
+                  color: Color(0xFFE94560),
                 ),
                 textAlign: TextAlign.start,
               ),
@@ -127,43 +126,92 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               const SizedBox(height: 20),
               TextFormField(
                 controller: _fullNameController,
+                style: TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
                   labelText: 'Full Name',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.person),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.person, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                 ),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _usernameController,
+                style: TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
                   labelText: 'Username',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.mail),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.mail, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                 ),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _emailController,
+                style: TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.mail),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.mail, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                 ),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _passwordController,
                 obscureText: !_passwordVisible,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -198,7 +246,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       fontWeight: FontWeight.normal,
                     ),
                     elevation: 3,
-                    backgroundColor: const Color(0xFF0077B6),
+                    backgroundColor: const Color(0xFFE94560),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(47),
@@ -209,11 +257,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  // Navigate to signup screen
                   context.go('/signin');
                 },
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  foregroundColor: MaterialStateProperty.all(Color(0xFFE94560)),
                   padding: MaterialStateProperty.all(EdgeInsets.all(15)),
                 ),
                 child: Text('Already have an account? Sign in'),
