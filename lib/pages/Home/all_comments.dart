@@ -38,6 +38,7 @@ class _AllCommentsState extends State<AllComments> {
       // Parse the JSON
       return jsonDecode(response.body);
     } else {
+      print(response.body);
       // Handle errors
       throw Exception('Failed to load comments');
     }
