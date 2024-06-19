@@ -78,6 +78,7 @@ class _SignInWidgetState extends State<SignInWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Color(0xFF1A1A2E),
         padding: EdgeInsets.all(20),
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -90,7 +91,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF03045E)),
+                    color: Color(0xFFE94560)),
                 textAlign: TextAlign.left,
               ),
               const Text(
@@ -98,7 +99,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF03045E)),
+                    color: Color(0xFFE94560)),
                 textAlign: TextAlign.start,
               ),
               Container(
@@ -107,32 +108,50 @@ class _SignInWidgetState extends State<SignInWidget> {
               SizedBox(height: 20),
               TextFormField(
                 controller: _emailController,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.mail,
-                    color: Color(0xFF03045E),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.mail, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                 ),
               ),
               SizedBox(height: 20),
               TextFormField(
                 controller: _passwordController,
                 obscureText: !_passwordVisible,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Color(0xFF03045E),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white54),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFE94560)),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.white),
+                  filled: true,
+                  fillColor: Color(0xFF16213E),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _passwordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: Color(0xFF03045E),
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -162,7 +181,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                       fontWeight: FontWeight.normal,
                     ),
                     elevation: 3,
-                    backgroundColor: const Color(0xFF0077B6),
+                    backgroundColor: const Color(0xFFE94560),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(47),
@@ -178,11 +197,10 @@ class _SignInWidgetState extends State<SignInWidget> {
               SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  // Navigate to signup screen
                   context.go('/signup');
                 },
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  foregroundColor: MaterialStateProperty.all(Color(0xFFE94560)),
                   padding: MaterialStateProperty.all(EdgeInsets.all(15)),
                 ),
                 child: Text('Don\'t have an account? Sign up'),

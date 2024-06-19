@@ -72,7 +72,7 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFF1E1E2C), // Dark Blue Background
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -84,22 +84,28 @@ class _PostWidgetState extends State<PostWidget> {
                 Text(
                   'Create Blog Post',
                   style: TextStyle(
-                    fontSize: 20,
+                    color: Colors.white,
+                    fontSize: 24,
                     fontFamily: GoogleFonts.poppins().fontFamily,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 24),
                 TextFormField(
                   controller: _titleController,
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
                     labelText: 'Title',
+                    labelStyle: TextStyle(color: Colors.white54),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black26),
+                      borderSide: BorderSide(color: Colors.white54),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
-                    filled: false,
-                    fillColor: Colors.black12,
+                    filled: true,
+                    fillColor: Color(0xFF2A2A3C), // Dark Grayish Blue
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderSide: BorderSide(color: Color(0xFFE74C3C)), // Red
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
                   validator: (value) {
@@ -112,15 +118,19 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _descriptionController,
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
                     labelText: 'Description',
+                    labelStyle: TextStyle(color: Colors.white54),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black26),
+                      borderSide: BorderSide(color: Colors.white54),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
-                    filled: false,
-                    fillColor: Colors.white,
+                    filled: true,
+                    fillColor: Color(0xFF2A2A3C), // Dark Grayish Blue
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black26),
+                      borderSide: BorderSide(color: Color(0xFFE74C3C)), // Red
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
                   validator: (value) {
@@ -133,15 +143,19 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _contentController,
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
                     labelText: 'Content',
+                    labelStyle: TextStyle(color: Colors.white54),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderSide: BorderSide(color: Colors.white54),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
-                    filled: false,
-                    fillColor: Colors.white,
+                    filled: true,
+                    fillColor: Color(0xFF2A2A3C), // Dark Grayish Blue
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderSide: BorderSide(color: Color(0xFFE74C3C)), // Red
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
                   maxLines: 10,
@@ -156,16 +170,20 @@ class _PostWidgetState extends State<PostWidget> {
                 Center(
                   child: ElevatedButton(
                     onPressed: _submitPost,
-                    child: Text('Submit Post'),
                     style: ElevatedButton.styleFrom(
-                      iconColor: Colors.lightBlueAccent,
+                      primary: Color(0xFFE74C3C), // Red Button
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      textStyle: TextStyle(fontSize: 16),
+                      textStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    child: Text('Submit Post'),
                   ),
                 ),
               ],
