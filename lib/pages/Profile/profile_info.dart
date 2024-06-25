@@ -16,6 +16,7 @@ class ProfileInfo extends StatefulWidget {
 class _ProfileInfoState extends State<ProfileInfo> {
   String name = "";
   String username = "";
+  String email = "";
   String bio = "";
 
   void _logout() async {
@@ -45,15 +46,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
       setState(() {
         name = res['user']['name'];
         username = res['user']['username'];
+        email = res['user']['email'];
       });
 
       print(res['user']);
     } else {
       print(response.body);
-      throw Exception('Failed to load blogs');
+      throw Exception('Failed to load user information');
     }
   }
 
+  @override
   void initState() {
     super.initState();
     _fetchUserInformation();
@@ -63,6 +66,18 @@ class _ProfileInfoState extends State<ProfileInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Profile Information',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.lightBlueAccent,
+        centerTitle: true,
+      ),
       body: Container(
         height: double.infinity,
         child: SingleChildScrollView(
@@ -75,7 +90,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   child: CircleAvatar(
                     radius: 60,
                     backgroundImage: NetworkImage(
-                        'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'), // Replace with your profile image URL
+                      'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                    ),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -85,7 +101,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
@@ -94,31 +110,96 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     '@$username',
                     style: TextStyle(
                       fontSize: 18,
-                      // color: Colors.white70,
+                      color: Colors.grey[700],
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 32),
                 Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Username',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          username,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          email,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 32),
                 Center(
                   child: TextButton(
                     onPressed: _logout,
-                    child: Text('logout'),
+                    child: Text('Logout'),
                     style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(16)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)))),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 24,
+                      )),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
