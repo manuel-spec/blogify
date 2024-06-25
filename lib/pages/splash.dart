@@ -28,16 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF0077B6),
+    return Scaffold(
+      backgroundColor: Color(0xFFffffff),
       body: Center(
-        child: Text(
-          'Blogify',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+        child: Image.asset(
+          'assets/banner.png',
+          width: 200, // Adjust the width as needed
+          height: 200, // Adjust the height as needed
         ),
       ),
     );
