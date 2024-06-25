@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:blogify/Services/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,16 +20,13 @@ class _PostWidgetState extends State<PostWidget> {
 
   void _submitPost() async {
     if (_formKey.currentState!.validate()) {
-      // Process the data (e.g., send it to a server or save it locally)
       String title = _titleController.text;
       String description = _descriptionController.text;
       String content = _contentController.text;
 
-      // Get the token from SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
 
-      // Make the HTTP POST request
       Uri url = Uri.parse(blogUrl);
 
       http.Response response = await http.post(
@@ -48,19 +44,16 @@ class _PostWidgetState extends State<PostWidget> {
       );
 
       if (response.statusCode == 201) {
-        // Clear the form
         _titleController.clear();
         _descriptionController.clear();
         _contentController.clear();
         print(response.body);
 
-        // Show a confirmation message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Post submitted successfully!')),
         );
       } else {
         print(response.body);
-        // Handle the error
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Failed to submit post. Please try again.')),
@@ -72,7 +65,7 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF5F5F5),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -104,7 +97,7 @@ class _PostWidgetState extends State<PostWidget> {
                     prefixIcon: Icon(Icons.title),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Colors.redAccent),
                     ),
                   ),
                   validator: (value) {
@@ -128,7 +121,7 @@ class _PostWidgetState extends State<PostWidget> {
                     prefixIcon: Icon(Icons.description),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Colors.redAccent),
                     ),
                   ),
                   validator: (value) {
@@ -152,7 +145,7 @@ class _PostWidgetState extends State<PostWidget> {
                     prefixIcon: Icon(Icons.text_snippet),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Colors.redAccent),
                     ),
                   ),
                   maxLines: 10,
@@ -169,7 +162,7 @@ class _PostWidgetState extends State<PostWidget> {
                     onPressed: _submitPost,
                     child: Text('Submit Post'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blueAccent,
+                      primary: Colors.redAccent,
                       onPrimary: Colors.white,
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 15),
