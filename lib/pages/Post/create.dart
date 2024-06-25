@@ -84,22 +84,27 @@ class _PostWidgetState extends State<PostWidget> {
                 Text(
                   'Create Blog Post',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                     fontFamily: GoogleFonts.poppins().fontFamily,
                   ),
                 ),
                 SizedBox(height: 24),
                 TextFormField(
                   controller: _titleController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Title',
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.black26),
                     ),
-                    filled: false,
-                    fillColor: Colors.black12,
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.title),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.blueAccent),
                     ),
                   ),
                   validator: (value) {
@@ -112,15 +117,18 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _descriptionController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Description',
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.black26),
                     ),
-                    filled: false,
+                    filled: true,
                     fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.description),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black26),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.blueAccent),
                     ),
                   ),
                   validator: (value) {
@@ -133,15 +141,18 @@ class _PostWidgetState extends State<PostWidget> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _contentController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Content',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.black26),
                     ),
-                    filled: false,
+                    filled: true,
                     fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.text_snippet),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.blueAccent),
                     ),
                   ),
                   maxLines: 10,
@@ -158,7 +169,8 @@ class _PostWidgetState extends State<PostWidget> {
                     onPressed: _submitPost,
                     child: Text('Submit Post'),
                     style: ElevatedButton.styleFrom(
-                      iconColor: Colors.lightBlueAccent,
+                      primary: Colors.blueAccent,
+                      onPrimary: Colors.white,
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       textStyle: TextStyle(fontSize: 16),
